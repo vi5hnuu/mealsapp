@@ -10,42 +10,52 @@ class MealItem extends StatelessWidget {
   final Complexity complexity;
   final Affordability affordability;
 
-
   void selectMeal(BuildContext ctx) {
-    Navigator.pushNamed(ctx, MealDetailScreen.routeName,arguments: {'id':this.id});
+    Navigator.pushNamed(ctx, MealDetailScreen.routeName,
+        arguments: {'id': this.id});
   }
 
-  String get complexityText{
-    switch(complexity){
-      case Complexity.Simple :return "Simple";
-      case Complexity.Hard:return "Hard";
-      case Complexity.Challenging:return "Challenging";
-      default:return "Unknown";
+  String get complexityText {
+    switch (complexity) {
+      case Complexity.Simple:
+        return "Simple";
+      case Complexity.Hard:
+        return "Hard";
+      case Complexity.Challenging:
+        return "Challenging";
+      default:
+        return "Unknown";
     }
   }
+
   const MealItem(
-      {
-      required this.id,
+      {required this.id,
       required this.title,
       required this.imageUrl,
       required this.duration,
       required this.complexity,
-      required this.affordability});
-  String get affordabilityText{
-    switch(affordability){
-      case Affordability.Pricey :return "Pricey";
-      case Affordability.Luxurious:return "Luxurious";
-      case Affordability.Affordable:return "Affordable";
-      default:return "Unknown";
+      required this.affordability,
+      });
+  String get affordabilityText {
+    switch (affordability) {
+      case Affordability.Pricey:
+        return "Pricey";
+      case Affordability.Luxurious:
+        return "Luxurious";
+      case Affordability.Affordable:
+        return "Affordable";
+      default:
+        return "Unknown";
     }
   }
+
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: EdgeInsets.all(10),
       child: InkWell(
         //Todo : splash hidden behind card ??? How ??
-        onTap: (){
+        onTap: () {
           selectMeal(context);
         },
         borderRadius: BorderRadius.all(
@@ -81,13 +91,15 @@ class MealItem extends StatelessWidget {
                     child: Container(
                       height: 30,
                       padding: EdgeInsets.symmetric(vertical: 5),
-                      width: MediaQuery.of(context).size.width-20,
+                      width: MediaQuery.of(context).size.width - 20,
                       color: Colors.black26,
                       child: FittedBox(
-                        child: Text(title,style: TextStyle(
-                          fontSize: 24,
-                          color: Colors.white70,
-                        ),
+                        child: Text(
+                          title,
+                          style: TextStyle(
+                            fontSize: 24,
+                            color: Colors.white70,
+                          ),
                           softWrap: true,
                           overflow: TextOverflow.fade,
                         ),
@@ -106,21 +118,27 @@ class MealItem extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Icon(Icons.schedule_rounded),
-                        SizedBox(width: 6,),
+                        SizedBox(
+                          width: 6,
+                        ),
                         Text('${duration} min')
                       ],
                     ),
                     Row(
                       children: [
                         Icon(Icons.energy_savings_leaf_outlined),
-                        SizedBox(width: 6,),
+                        SizedBox(
+                          width: 6,
+                        ),
                         Text(this.complexityText)
                       ],
                     ),
                     Row(
                       children: [
                         Icon(Icons.attach_money),
-                        SizedBox(width: 6,),
+                        SizedBox(
+                          width: 6,
+                        ),
                         Text(this.affordabilityText)
                       ],
                     )

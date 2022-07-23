@@ -1,12 +1,12 @@
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:mealsapp/modals/meal.dart';
 
 import '../dummy_data.dart';
 
 class MealDetailScreen extends StatelessWidget {
   static const routeName = '/MealDetailScreen';
-  const MealDetailScreen({Key? key}) : super(key: key);
+  final void Function(String) favCallback;
+  final bool Function(String) isfavCallback;
+  const MealDetailScreen({required this.favCallback,required this.isfavCallback});
 
   @override
   Widget build(BuildContext context) {
@@ -19,6 +19,14 @@ class MealDetailScreen extends StatelessWidget {
         appBar: AppBar(
           title: Text(selectedMeal.title),
         ),
+        floatingActionButton: FloatingActionButton(
+          backgroundColor: Colors.white,
+          onPressed: (){
+            favCallback(selectedMeal.id);
+          },
+          child: Icon(isfavCallback(selectedMeal.id) ? Icons.star_outlined:Icons.star_border,color: Colors.red,),tooltip: 'Delete recipe Temporarely',
+        ),
+        floatingActionButtonLocation: FloatingActionButtonLocation.miniEndTop,
         body: SingleChildScrollView(
           child: Column(
             children: [
